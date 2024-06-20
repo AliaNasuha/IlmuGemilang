@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Staff Teacher</title>
+</head>
+<style>
+    body {
+        font-family: Geneva, Verdana, sans-serif;
+        margin: 0;
+        background-color: #e5e5e5;
+    }
+
+    .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #f0f0f0;
+            padding: 10px 20px;
+            margin-bottom: 20px;
+            position: relative;
+            z-index: 10;
+        }
+
+        .navbar-left {
+            display: flex;
+            align-items: center;
+        }
+
+        .logo {
+            width: 100px; 
+            height: 100px; 
+            margin-right: 10px;
+        }
+
+        .site-name {
+            color: black;
+            font-size: 20px; 
+            font-weight: bold;
+        }
+
+        .navbar-right {
+            display: flex;
+            align-items: center;
+            transition: all 0.3s ease;
+        }
+
+        .navbar-right a {
+            color: #c23b22;
+            text-decoration: none;
+            font-weight: bold;
+            width: 100px;
+            height: 30px;
+            text-align: center;
+            font-size: 18px;
+            padding: 5px 10px;
+            border-radius: 5px;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        .navbar-right a:hover {
+            background-color: darkgrey;
+            color: black;
+        }
+
+.container {
+    background-color: #f0f0f0; 
+    padding: 50px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+h1 {
+    color: black;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+label {
+    margin-bottom: 10px;
+}
+
+select, input {
+    padding: 10px;
+    margin-bottom: 20px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+}
+
+button {
+    padding: 10px 20px;
+    background-color: #c23b22; 
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #a8321a;
+}
+
+a{
+            color: #fff;
+            text-decoration: none;
+        }
+
+</style>
+
+<body>
+    <nav class="navbar">
+        <div class="navbar-left">
+            <img src="{% static 'image/tuisyenlogo.jpg' %}" class="logo"> 
+            <span class="site-name">PUSAT TUISYEN ILMU GEMILANG</span>
+        </div>
+        <div class="navbar-right" id="navbar-right">
+            <a href="{% url 'logout' %}">Logout</a>
+        </div>
+    </nav>
+
+    <div class="container">
+        <h1>Welcome, Teacher</h1>
+        <form id="class-form" method="get" action="{% url 'teacher' %}">
+            <label for="Date">Date:</label>
+            <input type="date" name="date" required>
+            
+            <label for="class-select">Class:</label>
+            <select id="class-select" name="class" required>
+                {% for class in classes %}
+                <option value="{{ class.studclass }}">{{ class.studclass }}</option>
+                {% endfor %}
+            </select>
+            
+            <button type="submit">Submit</button>
+        </form>
+        {% if error %}
+        <p style="color:red;">{{ error }}</p>
+        {% endif %}
+    </div>
+    
+</body>
+</html>

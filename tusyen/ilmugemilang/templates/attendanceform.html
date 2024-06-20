@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Attendance</title>
+</head>
+<style>
+    body {
+        font-family: Geneva, Verdana, sans-serif;
+        margin: 0;
+        background-color: #e5e5e5;
+    }
+
+    .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #f0f0f0;
+            padding: 10px 20px;
+            margin-bottom: 20px;
+            position: relative;
+            z-index: 10;
+        }
+
+        .navbar-left {
+            display: flex;
+            align-items: center;
+        }
+
+        .logo {
+            width: 100px; 
+            height: 100px; 
+            margin-right: 10px;
+        }
+
+        .site-name {
+            color: black;
+            font-size: 20px; 
+            font-weight: bold;
+        }
+
+        .navbar-right {
+            display: flex;
+            align-items: center;
+            transition: all 0.3s ease;
+        }
+
+        .navbar-right a {
+            color: #c23b22;
+            text-decoration: none;
+            font-weight: bold;
+            width: 100px;
+            height: 30px;
+            text-align: center;
+            font-size: 18px;
+            padding: 5px 10px;
+            border-radius: 5px;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        .navbar-right a:hover {
+            background-color: darkgrey;
+            color: black;
+        }
+
+
+.container {
+    background-color: #f0f0f0; 
+    padding: 50px 20px;
+    margin-left: 9%;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    width: 80%;
+}
+
+h1 {
+    color: #c23b22;
+    margin-bottom: 20px;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+label {
+    margin-bottom: 10px;
+}
+
+select {
+    padding: 5px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    margin-bottom: 30px;
+}
+
+th, td {
+    padding: 10px;
+    border-bottom: 1px solid #ccc;
+    text-align: left;
+}
+
+th {
+    background-color: #f0f0f0;
+}
+
+button {
+    padding: 10px 20px;
+    background-color: #c23b22; 
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+button:hover {
+            background-color: #a32a14;
+        }
+
+</style>
+<body>
+    <nav class="navbar">
+        <div class="navbar-left">
+            <img src="{% static 'image/tuisyenlogo.jpg' %}" class="logo"> 
+            <span class="site-name">PUSAT TUISYEN ILMU GEMILANG</span>
+        </div>
+        <div class="navbar-right" id="navbar-right">
+            <a href="{% url 'teacher' %}">Home</a>
+            <a href="{% url 'logout' %}">Logout</a>
+        </div>
+    </nav>
+
+    <div class="container">
+        <h1>Student List</h1>
+        <p>Date: <span id="Date">{{ date }}</span></p>
+        <p>Class: <span id="class-name">{{ class_assigned.studclass }}</span></p>
+        <table>
+            <thead>
+                <tr>
+                    <th>Student Name</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+            <form method="post">
+                {% csrf_token %}
+                <tbody id="student-list">
+                    {% for assign in students_in_class %}
+                    <tr>
+                        <td>{{ assign.student.studname }}</td>
+                        <td>
+                            <select name="status_{{ assign.student.studname }}">
+                                <option value="Present">Present</option>
+                                <option value="Absent">Absent</option>
+                            </select>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+                <button type="submit">Save Attendance</button>
+            </form>
+        </table>
+    </div>
+</body>
+</html>

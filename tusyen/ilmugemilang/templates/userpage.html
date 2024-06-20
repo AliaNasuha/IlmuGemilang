@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pusat Tuisyen Ilmu Gemilang</title>
+    <style>
+body, .content {
+    font-family: Geneva, Verdana, sans-serif;
+    margin: 0;
+    background-color: #D0D9CD;
+}
+
+* { 
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Navbar Styles */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #78866b;
+    padding: 10px 20px;
+    margin-bottom: 20px;
+    position: relative;
+    z-index: 10;
+}
+
+.navbar-left {
+    display: flex;
+    align-items: center;
+}
+
+.logo {
+    width: 100px; 
+    height: 100px; 
+    margin-right: 10px;
+}
+
+.site-name {
+    color: #fff;
+    font-size: 20px; 
+    font-weight: bold;
+}
+
+.navbar-right {
+    display: flex;
+    align-items: center;
+    transition: all 0.3s ease;
+}
+
+.navbar-right a {
+    color: #fff;
+    text-decoration: none;
+    width: 130px;
+    height: 50px;
+    text-align: center;
+    font-size: 18px;
+    padding: 11px 15px;
+    border-radius: 5px;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    cursor: pointer;
+}
+
+.navbar-right a:hover {
+    background-color: #576d52;
+    color: #ddd;
+}
+
+/* Dropdown Menu */
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 130px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+    border-radius: 5px;
+}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+.dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+
+.dropdown-content a:hover {
+    background-color: #f1f1f1;
+}
+
+.menu-toggle {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+        }
+
+        .menu-toggle div {
+            width: 30px;
+            height: 2px;
+            background-color: #fff;
+            margin: 3px 0;
+        }
+
+/* Slider Styles */
+.slider-container {
+    position: relative;
+    height: 400px;
+    width: 100%;
+    max-width: 700px; 
+    margin: auto;
+    margin-bottom: 20px;
+    overflow: hidden;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.slider {
+    display: flex;
+    transition: transform 0.5s ease-in-out;
+}
+
+.slider img {
+    width: 100%; 
+    height: auto; 
+}
+
+.prev, .next {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: rgba(0, 0, 0, 0.5);
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    padding: 10px;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+.prev {
+    left: 10px;
+}
+
+.next {
+    right: 10px;
+}
+
+.prev:hover, .next:hover {
+    background-color: rgba(0, 0, 0, 0.8);
+}.slider-container {
+    position: relative;
+    height: 400px;
+    width: 100%;
+    max-width: 700px; 
+    margin: auto;
+    margin-bottom: 20px;
+    overflow: hidden;
+    border: 2px;
+    border-radius: 10px;
+}
+
+.slider {
+    display: flex;
+    transition: transform 0.5s ease-in-out;
+}
+
+.slider img {
+    display: none;
+}
+
+.slider img.active {
+    display: block;
+    width: 100%; 
+    height: auto; 
+}
+
+button {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: rgba(0, 0, 0, 0.5);
+    border: none;
+    color: white;
+    padding: 10px;
+    cursor: pointer;
+    border-radius: 50%;
+}
+
+.prev {
+    left: 10px;
+}
+
+.next {
+    right: 10px;
+}
+
+button:hover {
+    background-color: rgba(0, 0, 0, 0.8);
+}
+
+/* Contact Section */
+.contact-container {
+    width: 80%;
+    max-width: 600px;
+    margin: 20px auto;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+.contact-info p {
+    margin-bottom: 10px;
+    font-size: 18px;
+}
+
+/* Brochure Section */
+.brochure {
+    text-align: center;
+    margin: 40px auto;
+    padding: 20px;
+    border: 2px solid #576d52;
+    border-radius: 10px;
+    background-color: #fff;
+    max-width: 700px;
+}
+
+.brochure img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 10px;
+}
+
+.brochure-buttons {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.brochure-buttons .login, .brochure-buttons .register {
+    display: inline-block;
+    background-color: #576d52;
+    color: #fff;
+    text-decoration: none;
+    padding: 10px 20px;
+    margin: 0 10px;
+    border-radius: 5px;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.brochure-buttons .login:hover, .brochure-buttons .register:hover {
+    background-color: #475e45;
+}
+
+/* Intro Section */
+.intro-container {
+    width: 80%;
+    max-width: 800px;
+    margin: 20px auto;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    text-align: justify;
+    line-height: 1.6;
+}
+
+.intro h2 {
+    margin-bottom: 20px;
+}
+
+/* Footer Section */
+.footer {
+    background-color: #333;
+    color: #fff;
+    padding: 20px 0;
+    text-align: center;
+}
+
+.footer .container {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    max-width: 1200px;
+    margin: auto;
+}
+
+.footer .container div {
+    margin: 10px;
+}
+
+.footer .container h3 {
+    margin-bottom: 10px;
+    font-size: 20px;
+    color: #f0f8ff;
+}
+
+.footer .container p, .footer .container a {
+    color: #ddd;
+    font-size: 16px;
+    text-decoration: none;
+}
+
+.footer .container a:hover {
+    color: #fff;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .navbar-right {
+        display: none;
+        flex-direction: column;
+        position: absolute;
+        top: 100px;
+        right: 0;
+        width: 100%;
+        background-color: #78866b;
+        border: solid #fff;
+    }
+
+    .navbar-right a {
+        padding: 15px 0;
+        margin: 0;
+        width: 100%;
+        text-align: center;
+    }
+
+    .menu-toggle {
+        display: flex;
+    }
+
+    .slider-container {
+        height: 300px;
+    }
+}
+
+    </style>
+</head>
+
+<body id="bg">
+    <nav class="navbar">
+        <div class="navbar-left">
+            <img src="{% static 'image/tuisyenlogo.jpg' %}" class="logo"> 
+            <span class="site-name">PUSAT TUISYEN ILMU GEMILANG</span>
+        </div>
+        <div class="menu-toggle" onclick="toggleMenu()">
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+        <div class="navbar-right" id="navbar-right">
+            <div class="dropdown">
+                <a href="#" class="dropbtn">Login</a>
+                <div class="dropdown-content">
+                    <a href="{% url 'userlogin' %}">User</a>
+                    <a href="{% url 'teacherlogin' %}">Teacher</a>
+                    <a href="{% url 'adminlogin' %}">Admin</a>
+                </div>
+            </div>
+            <a href="{% url 'usersignup' %}">Register</a>
+            <a href="{% url 'course' %}">Program</a>
+            <a href="{% url 'fee' %}">Tuition Fee</a>
+            <a href="{% url 'contact' %}">Contact Us</a>
+        </div>
+    </nav>
+
+    <div class="slider-container">
+        <div class="slider">
+            <img src="{% static 'image/foto1.jpg' %}" class="image-item active">
+            <img src="{% static 'image/foto3.jpg' %}" class="image-item">
+            <img src="{% static 'image/foto4.jpg' %}" class="image-item">
+        </div>
+        <button class="prev" onclick="prevSlide()">&#10094;</button>
+        <button class="next" onclick="nextSlide()">&#10095;</button>
+    </div>
+
+    <div class="contact-container">
+        <div class="contact-info">
+            <h2>Business Hours</h2>
+            <p><strong>Monday - Friday:</strong> 9:00 AM - 6:00 PM</p>
+            <p><strong>Saturday:</strong> 10:00 AM - 4:00 PM</p>
+            <p><strong>Sunday:</strong> Closed</p>
+        </div>
+    </div>
+
+    <div class="brochure">
+        <img src="{% static 'image/foto2.jpeg' %}" alt="Brochure">
+        <div class="brochure-buttons">
+            <a href="{% url 'userlogin' %}" class="login">Login</a>
+            <a href="{% url 'usersignup' %}" class="register">Register</a>
+        </div>
+    </div>
+
+    <div class="intro-container">
+        <div class="intro">
+            <h2>GET TO KNOW US</h2>
+            <p>At PUSAT TUISYEN ILMU GEMILANG, we're not just a place for education; we're a community where students thrive, minds expand, and potentials are realised. Our mission is simple yet profound: to provide a supportive and enriching environment where every student can excel academically and personally.</p>
+            <p>With a team of dedicated and experienced teachers, we offer tailored instruction that meets the unique needs of each student. Whether it's mastering challenging concepts, building essential skills, or preparing for exams, we're here to guide and inspire every step of the way.</p>
+            <p>But what truly sets us apart is our commitment to nurturing a love for learning. Beyond academic success, we prioritize the holistic development of our students, fostering critical thinking, creativity, and confidence that extend far beyond the classroom.</p>
+            <p>Join us and embark on a journey of growth, discovery, and endless possibilities. Welcome to a place where learning knows no bounds – welcome to PUSAT TUISYEN ILMU GEMILANG.</p>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <div class="container">
+            <div>
+                <h3>Contact Details</h3>
+                <p> +60 10-247 4479</p>
+                <p> +60 16-981 2196</p>
+            </div>
+            <div>
+                <h3>Address</h3>
+                <p>Pusat Tuisyen Ilmu Gemilang, Eco Majestic</p>
+                <p>No. 45-1, Jalan Eco Majestic 9/1A,</p>
+                <p>Semenyih, Selangor 43500</p>
+            </div>
+            <div>
+                <h3>Follow Us</h3>
+                <p><a href="https://www.facebook.com/profile.php?id=100090586203989">Facebook</a></p>
+            </div>
+        </div>
+    </footer>
+
+<script>
+    function toggleMenu() {
+        var navbarRight = document.getElementById("navbar-right");
+        if (navbarRight.style.display === "flex" || navbarRight.style.display === "") {
+            navbarRight.style.display = "none";
+        } else {
+            navbarRight.style.display = "flex";
+        }}
+
+        let currentSlide = 0;
+
+function showSlide(index) {
+    const slides = document.querySelectorAll('.slider img');
+    slides.forEach((slide, i) => {
+        slide.classList.remove('active');
+        if (i === index) {
+            slide.classList.add('active');
+        }
+    });
+}
+
+function nextSlide() {
+    const slides = document.querySelectorAll('.slider img');
+    currentSlide = (currentSlide + 1) % slides.length;
+    showSlide(currentSlide);
+}
+
+function prevSlide() {
+    const slides = document.querySelectorAll('.slider img');
+    currentSlide = (currentSlide - 1 + slides.length) % slides.length;
+    showSlide(currentSlide);
+}
+
+showSlide(currentSlide);
+setInterval(nextSlide,3000);
+</script>
+</html>

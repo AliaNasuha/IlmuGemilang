@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Registration</title>
+    <style>
+        body {
+            font-family: Geneva, Verdana, sans-serif;
+            margin: 0;
+            background-color: #D0D9CD;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #78866b;
+            padding: 10px 20px;
+            margin-bottom: 20px;
+            position: relative;
+            z-index: 10;
+        }
+
+        .navbar-left {
+            display: flex;
+            align-items: center;
+        }
+
+        .logo {
+            width: 100px; 
+            height: 100px; 
+            margin-right: 10px;
+        }
+
+        .site-name {
+            color: #fff;
+            font-size: 20px; 
+            font-weight: bold;
+        }
+
+        .navbar-right {
+            display: flex;
+            align-items: center;
+            transition: all 0.3s ease;
+        }
+
+        .navbar-right a {
+            color: #fff;
+            text-decoration: none;
+            width: 130px;
+            height: 50px;
+            text-align: center;
+            font-size: 18px;
+            padding: 5px 10px;
+            border-radius: 5px;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        .navbar-right a:hover {
+            background-color: #576d52;
+            color: #ddd;
+        }
+
+        .menu-toggle {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+        }
+
+        .menu-toggle div {
+            width: 30px;
+            height: 2px;
+            background-color: #fff;
+            margin: 3px 0;
+        }
+
+        @media (max-width: 768px) {
+            .navbar-right {
+                display: none;
+                flex-direction: column;
+                width: 60%;
+                background-color: #78866b;
+                position: absolute;
+                top: 100px;
+                right: 0;
+                border: solid #fff;
+            }
+
+            .navbar-right a {
+                padding: 15px 0;
+                margin: 0;
+                width: 110px;
+                text-align: center;
+            }
+
+            .navbar-right a:first-child {
+                border-top: none;
+            }
+
+            .navbar-right a:last-child {
+                border-bottom: none;
+            }
+
+            .menu-toggle {
+                display: flex;
+            }
+        }
+
+        .container {
+            width: 70%;
+            margin: 20px auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h2 {
+            text-align: center;
+            color: #333;
+        }
+
+        form {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+        }
+
+        .form-group {
+            width: 48%;
+            margin-bottom: 20px;
+        }
+
+        .form-group.full-width {
+            width: 100%;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+
+        input[type="text"],
+        input[type="email"],
+        input[type="tel"],
+        input[type="number"],
+        textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        .subjects-container {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .subjects-container label {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .subjects-container input[type="checkbox"] {
+            margin-right: 10px;
+        }
+
+        input[type="submit"] {
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+            border-radius: 5px;
+            width: 100%;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #0056b3;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                width: 90%;
+            }
+
+            .form-group {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="navbar-left">
+            <img src="{% static 'image/tuisyenlogo.jpg' %}" class="logo"> 
+            <span class="site-name">PUSAT TUISYEN ILMU GEMILANG</span>
+        </div>
+        <div class="menu-toggle" onclick="toggleMenu()">
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+        <div class="navbar-right" id="navbar-right">
+            <a href="{% url 'mainpage' %}">Home</a>
+            <a href="{% url 'course' %}">Program</a>
+            <a href="{% url 'fee' %}">Tuition Fee</a>
+            <a href="{% url 'contact' %}">Contact Us</a>
+        </div>
+    </nav> 
+
+    <center><h1>Student Registration Form</h1></center>
+    <form action="{% url 'register' %}" method="POST" class="container">
+        {% csrf_token %}
+        <div class="form-group">
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="name" required>
+        </div>
+
+        <div class="form-group">
+            <label for="nric">NRIC:</label>
+            <input type="text" id="nric" name="nric" required>
+        </div>
+
+        <div class="form-group">
+            <label for="age">Age:</label>
+            <input type="number" id="age" name="age" required>
+        </div>
+
+        <div class="form-group full-width">
+            <div style="display: flex; justify-content: space-between; gap: 2%;">
+                <div style="flex: 1;">
+                    <label for="contact_house">Contact Number (House):</label>
+                    <input type="tel" id="contact_house" name="contact_house">
+                </div>
+
+                <div style="flex: 1;">
+                    <label for="contact_mobile">Contact Number (Mobile):</label>
+                    <input type="tel" id="contact_mobile" name="contact_mobile" required>
+                </div>
+
+                <div style="flex: 1;">
+                    <label for="contact_parents">Contact Number (Parents):</label>
+                    <input type="tel" id="contact_parents" name="contact_parents">
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="email">Email Address:</label>
+            <input type="email" id="email" name="email" required>
+        </div>
+
+        <div class="form-group">
+            <label for="school">Current School:</label>
+            <input type="text" id="school" name="school" required>
+        </div>
+
+        <div class="form-group">
+            <label for="standard">Form 1/2/3/4/5:</label>
+            <input type="text" id="standard" name="standard" required>
+        </div>
+
+        <div class="form-group full-width">
+            <label for="address">House Address:</label>
+            <textarea id="address" name="address" rows="4" cols="50" required></textarea>
+        </div>
+
+        <div class="form-group full-width">
+            <label for="subject">Select Subjects:</label>
+            <div class="subjects-container">
+                <label><input type="checkbox" name="Subject" value="Mathematics"> Mathematics</label>
+                <label><input type="checkbox" name="Subject" value="Science"> Science</label>
+                <label><input type="checkbox" name="Subject" value="History"> History</label>
+                <label><input type="checkbox" name="Subject" value="Additional Mathematics"> Additional Mathematics</label>
+                <label><input type="checkbox" name="Subject" value="Biology"> Biology</label>
+                <label><input type="checkbox" name="Subject" value="Chemistry"> Chemistry</label>
+                <label><input type="checkbox" name="Subject" value="Physics"> Physics</label>
+            </div>
+        </div>
+
+        <div class="button">
+            <input type="submit" value="Submit">
+        </div>
+    </form>
+
+    <script>
+        function toggleMenu() {
+            var navbarRight = document.getElementById("navbar-right");
+            if (navbarRight.style.display === "flex" || navbarRight.style.display === "") {
+                navbarRight.style.display = "none";
+            } else {
+                navbarRight.style.display = "flex";
+            }
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tuition Fee </title>
+    <style>
+        body, html {
+    margin: 0;
+    padding: 0;
+    font-family: Geneva, Verdana, sans-serif;
+    background-color: #D0D9CD;
+}
+
+/* Navbar styles */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #78866b;
+    padding: 10px 20px;
+    margin-bottom: 20px;
+    position: relative;
+    z-index: 10;
+}
+
+.navbar-left {
+    display: flex;
+    align-items: center;
+}
+
+.logo {
+    width: 100px; 
+    height: 100px; 
+    margin-right: 10px;
+}
+
+.site-name {
+    color: #fff;
+    font-size: 20px; 
+    font-weight: bold;
+}
+
+.navbar-right {
+    display: flex;
+    align-items: center;
+}
+
+.navbar-right a {
+    color: #fff;
+    text-decoration: none;
+    width: 130px;
+    height: 50px;
+    text-align: center;
+    font-size: 18px;
+    padding: 5px 10px;
+    border-radius: 5px;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.navbar-right a:hover {
+    background-color: #576d52;
+    color: #ddd;
+}
+
+.menu-toggle {
+    display: none;
+    flex-direction: column;
+    cursor: pointer;
+}
+
+.menu-toggle div {
+    width: 30px;
+    height: 2px;
+    background-color: #fff;
+    margin: 3px 0;
+}
+
+/* Table styles */
+.fees-table {
+    margin: 0 auto;
+    width: 80%;
+}
+
+.fees-table table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+}
+
+.fees-table caption {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.fees-table th, .fees-table td {
+    padding: 10px;
+    text-align: left;
+    border-bottom: 1px solid black;
+}
+
+.fees-table th {
+    background-color: #78866b;
+    color: white;
+}
+
+.fees-table tbody strong {
+    font-weight: bold;
+}
+
+.footer {
+    background-color: #333;
+    color: #fff;
+    padding: 15px 0; /* Decreased padding to make it smaller */
+    text-align: center;
+    margin-top: 57px;
+}
+
+.footer .container {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    max-width: 1200px;
+    margin: auto;
+}
+
+.footer .container div {
+    margin: 10px;
+}
+
+.footer .container h3 {
+    margin-bottom: 10px;
+    font-size: 18px; /* Adjusted font size for headings */
+    color: #f0f8ff;
+}
+
+.footer .container p, .footer .container a {
+    color: #ddd;
+    font-size: 14px; /* Adjusted font size for paragraphs and links */
+    text-decoration: none;
+}
+
+.footer .container a:hover {
+    color: #fff;
+}
+
+/* Responsive styles */
+@media (max-width: 768px) {
+    .navbar-right {
+        display: none;
+        flex-direction: column;
+        width: 60%;
+        background-color: #78866b;
+        position: absolute;
+        top: 100px;
+        right: 0;
+        border: solid #fff;
+    }
+
+    .navbar-right a {
+        padding: 15px 0;
+        margin: 0;
+        width: 110px;
+        text-align: center;
+    }
+
+    .navbar-right a:first-child {
+        border-top: none;
+    }
+
+    .navbar-right a:last-child {
+        border-bottom: none;
+    }
+
+    .menu-toggle {
+        display: flex;
+    }
+
+    .fees-table {
+        width: 100%;
+    }
+}
+
+</style>
+</head>
+
+<body>
+    <nav class="navbar">
+        <div class="navbar-left">
+            <img src="{% static 'image/tuisyenlogo.jpg' %}" class="logo"> 
+            <span class="site-name">PUSAT TUISYEN ILMU GEMILANG</span>
+        </div>
+        <div class="menu-toggle" onclick="toggleMenu()">
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+        <div class="navbar-right" id="navbar-right">
+            <a href="{% url 'mainpage' %}">Home</a>
+            <a href="{% url 'course' %}">Program</a>
+            <a href="{% url 'fee' %}">Tuition Fee</a>
+            <a href="{% url 'contact' %}">Contact Us</a>
+        </div>
+    </nav>
+<center>
+<br><h1>Tuition Fee</h1><br>
+
+<div class="fees-table">
+    <table>
+        <caption>Fee Structure including Deposit</caption>
+        <thead>
+            <tr>
+                <th>Item</th>
+                <th>Amount</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Registration</td>
+                <td>RM 100 (One-Time-Off)</td>
+            </tr>
+            <tr>
+                <td>Material Fees</td>
+                <td>RM 380 Yearly</td>
+            </tr>
+            <tr>
+                <td>Misc Fees</td>
+                <td>RM 380 Yearly</td>
+            </tr>
+            <tr>
+                <td>Activities Fees</td>
+                <td>RM 380 Yearly</td>
+            </tr>
+            <tr>
+                <td>Insurance</td>
+                <td>RM 380 Yearly</td>
+            </tr>
+            <tr>
+                <td><strong>Deposit Payment</strong></td>
+                <td><strong>RM 350</strong></td>
+            </tr>
+            <tr>
+                <td><strong>TOTAL</strong></td>
+                <td><strong>RM 1670</strong></td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<footer class="footer">
+    <div class="container">
+        <div>
+            <h3>Contact Details</h3>
+            <p> +60 10-247 4479</p>
+            <p> +60 16-981 2196</p>
+        </div>
+        <div>
+            <h3>Address</h3>
+            <p>Pusat Tuisyen Ilmu Gemilang, Eco Majestic</p>
+            <p>No. 45-1, Jalan Eco Majestic 9/1A,</p>
+            <p>Semenyih, Selangor 43500</p>
+        </div>
+        <div>
+            <h3>Follow Us</h3>
+            <p><a href="https://www.facebook.com/profile.php?id=100090586203989">Facebook</a></p>
+        </div>
+    </div>
+</footer>
+
+<script>
+    function toggleMenu() {
+        var navbarRight = document.getElementById("navbar-right");
+        if (navbarRight.style.display === "flex" || navbarRight.style.display === "") {
+            navbarRight.style.display = "none";
+        } else {
+            navbarRight.style.display = "flex";
+        }}
+</script>
+
+</body>
+</html>
